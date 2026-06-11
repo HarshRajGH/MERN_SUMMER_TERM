@@ -43,3 +43,10 @@ const updatedStudent = student.map((student) => {
     };
 });
 console.log(updatedStudent);
+
+// Filter function to get the passed and failed students
+
+const passedStudents = updatedStudent.filter(student => student.resultStatus === "Pass");
+const failedStudents = updatedStudent.filter(student => student.resultStatus === "Fail");
+console.log("Passed Students:", passedStudents);
+console.log("Failed Students:", failedStudents);
