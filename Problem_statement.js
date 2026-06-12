@@ -80,4 +80,4 @@ const orderAnalytics = orders.map(order => {
         rewardPoints
     };
 });
-console.log(orderAnalytics);
+console.log("orderAnalytics Report:", orderAnalytics);
