@@ -1,5 +1,5 @@
 import {useState} from 'react';
-function Home() {
+function Home({addToCart}) {
     const [counter, setCounter] = useState(0);
     const [btnText, setBtnText] = useState("Shop Now");
     return (
@@ -36,7 +36,7 @@ function Home() {
                             <p>High-quality traditional keys for your home and office.</p>
                             <div className="product-footer">
                                 <strong className="price">$5.99</strong>
-                                <button className="add-btn">Add to Cart</button>
+                                <button className="add-btn" onClick={addToCart}>Add to Cart</button>
                             </div>
                         </div>
                     </div>
@@ -50,7 +50,7 @@ function Home() {
                             <p>Advanced smart keys with enhanced security features.</p>
                             <div className="product-footer">
                                 <strong className="price">$19.99</strong>
-                                <button className="add-btn">Add to Cart</button>
+                                <button className="add-btn" onClick={addToCart}>Add to Cart</button>
                             </div>
                         </div>
                     </div>
@@ -64,7 +64,7 @@ function Home() {
                             <p>Stylish keychains and accessories to complement your keys.</p>
                             <div className="product-footer">
                                 <strong className="price">$9.99</strong>
-                                <button className="add-btn">Add to Cart</button>
+                                <button className="add-btn" onClick={addToCart}>Add to Cart</button>
                             </div>
                         </div>
                     </div>
