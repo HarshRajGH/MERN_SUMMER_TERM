@@ -2,6 +2,29 @@ import {useState} from 'react';
 function Home({addToCart}) {
     const [counter, setCounter] = useState(0);
     const [btnText, setBtnText] = useState("Shop Now");
+      const products = [
+    {
+      name: 'Traditional Key Chain',
+      description: 'Colorful and cute design.',
+      price: 99,
+      image: '/images/product1.jpg',
+        badge: 'New'
+    },
+    {
+      name: 'Smart Key Chain',
+      description: 'Customized with your name.',
+      price: 149,
+      image: '/images/product2.jpg',
+      badge: 'Popular'
+    },
+    {
+      name: 'key Accessories',
+      description: 'Premium and classy look.',
+      price: 199,
+      image: '/images/product3.jpg',
+      badge: 'Sale'
+    }
+  ];
     return (
         <div className="page">
             <section className="hero">
@@ -15,7 +38,7 @@ function Home({addToCart}) {
                 </div>
 
                 <div className="heroimage">
-                    <img src="/images/image.png"  alt="Key Shop" />
+                    <img src="/images/product3.jpg"  alt="Key Shop" />
                 </div>
 
                 {/*Product section */}
@@ -26,48 +49,24 @@ function Home({addToCart}) {
                     <p>Explore our wide selection of keys and accessories.</p>
                 </div>
                 <div className="productGrid">
-                    <div className="product-card">
-                        <div className="product-image">
-                            <img src="/images/product1.jpg" alt="Traditional Key" />
-                            <span className="badge">Best Seller</span>
-                        </div>
-                        <div className="product-content">
-                            <h3>Traditional Key</h3>
-                            <p>High-quality traditional keys for your home and office.</p>
-                            <div className="product-footer">
-                                <strong className="price">$5.99</strong>
-                                <button className="add-btn" onClick={addToCart}>Add to Cart</button>
+                    {
+                        products.map((product, index) => (
+                            <div className="product-card" key={index}>
+                                <div className="product-image">
+                                    <img src={product.image} alt={product.name} />
+                                    <span className="badge">{product.badge}</span>
+                                </div>
+                                <div className="product-content">
+                                    <h3>{product.name}</h3>
+                                    <p>{product.description}</p>
+                                    <div className="product-footer">
+                                        <strong className="price">${product.price.toFixed(2)}</strong>
+                                        <button className="add-btn" onClick={addToCart}>Add to Cart</button>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div className="product-card">
-                        <div className="product-image">
-                            <img src="/images/product2.jpg" alt="Smart Key" />
-                            <span className="badge badge-premium">Premium</span>
-                        </div>
-                        <div className="product-content">
-                            <h3>Smart Key</h3>
-                            <p>Advanced smart keys with enhanced security features.</p>
-                            <div className="product-footer">
-                                <strong className="price">$19.99</strong>
-                                <button className="add-btn" onClick={addToCart}>Add to Cart</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="product-card">
-                        <div className="product-image">
-                            <img src="/images/product3.jpg" alt="Key Accessories" />
-                            <span className="badge badge-new">New</span>
-                        </div>
-                        <div className="product-content">
-                            <h3>Key Accessories</h3>
-                            <p>Stylish keychains and accessories to complement your keys.</p>
-                            <div className="product-footer">
-                                <strong className="price">$9.99</strong>
-                                <button className="add-btn" onClick={addToCart}>Add to Cart</button>
-                            </div>
-                        </div>
-                    </div>
+                        ))
+                    }
                 </div>
             </section>
 
