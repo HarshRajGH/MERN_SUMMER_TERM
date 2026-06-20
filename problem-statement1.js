@@ -11,7 +11,12 @@ const students = [
 const passedstudents = students.filter(student => student.marks >= 40 && student.attendance >= 40);
  // map function for report card
 const studentReport = students.map(({ name, marks, attendance }) => {
-    const grade = marks >= 80 ? 'A' : marks >= 60 ? 'B' : marks >= 40 ? 'C' : 'F';
+    let grade;
+  if (marks >= 80) grade = 'A';
+  else if (marks >= 60) grade = 'B';
+  else if (marks >= 40) grade = 'C';
+  else grade = 'F';
+
   return { name, marks, attendance, grade };
 });
 
