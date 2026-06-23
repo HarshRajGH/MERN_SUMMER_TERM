@@ -336,6 +336,52 @@ nav ul li a:hover::after {
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
 }
 
+.cartPage {
+    padding: 60px;
+    min-height: calc(100vh - 220px);
+    background: #f4f7fd;
+}
+
+.cartPage.emptyCart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    text-align: center;
+    background: linear-gradient(180deg, #ffffff 0%, #e9f0ff 100%);
+    border-radius: 24px;
+    border: 1px solid #dfe7f5;
+    box-shadow: 0 14px 38px rgba(45, 84, 148, 0.08);
+}
+
+.cartPage h1 {
+    font-size: 38px;
+    color: #1d3f6e;
+    margin-bottom: 8px;
+}
+
+.cartPage p {
+    font-size: 18px;
+    color: #4a5a72;
+}
+
+.continueShoppingBtn {
+    display: inline-block;
+    padding: 14px 30px;
+    background: linear-gradient(135deg, #2c5aa0 0%, #1a3a5c 100%);
+    color: #ffffff;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.continueShoppingBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(44, 90, 160, 0.25);
+}
+
 /* ===== FOOTER ===== */
 footer {
     margin-top: auto;
@@ -398,4 +444,7 @@ footer {
     .about-content img {
         width: 100%;
     }
+}
+emptyCart{
+
 }

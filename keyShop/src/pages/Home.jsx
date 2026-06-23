@@ -61,7 +61,7 @@ function Home({addToCart}) {
                                     <p>{product.description}</p>
                                     <div className="product-footer">
                                         <strong className="price">${product.price.toFixed(2)}</strong>
-                                        <button className="add-btn" onClick={addToCart}>Add to Cart</button>
+                                        <button className="add-btn" onClick={() => addToCart(product)}>Add to Cart</button>
                                     </div>
                                 </div>
                             </div>
