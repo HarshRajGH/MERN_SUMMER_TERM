@@ -407,6 +407,10 @@ nav ul li a:hover::after {
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 24px;
+    background-color: rgb(217, 183, 243);
+    padding: 18px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(30, 60, 100, 0.08);
 }
 
 .cartItems {
