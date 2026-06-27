@@ -1,5 +1,5 @@
 import {Link} from 'react-router-dom';
-function Header({cartCount}) {
+function Header({cartCount, buyLaterCount}) {
     return (
         <header>
             <h1>Key Shop</h1>
@@ -10,6 +10,12 @@ function Header({cartCount}) {
                     <li><Link to="/about">About</Link></li>
                     <li><Link to="/contact">Contact</Link></li>
                     <li><Link to="/cart">Cart🛒({cartCount})</Link></li>
+                    <li>
+                        <Link to="/buy-later">
+                            Buy Later🕒
+                            {buyLaterCount > 0 && <span className="notifyDot" />}
+                        </Link>
+                    </li>
                 </ul>
             </nav>
         </header>

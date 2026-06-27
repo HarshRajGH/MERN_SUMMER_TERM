@@ -29,6 +29,30 @@ function Home({ addToCart }) {
             image: '/images/product3.png',
             badge: 'Sale',
         },
+        {
+            id: 4,
+            name: 'Vintage Brass Key Set',
+            description: 'Antique finish with rich detailing.',
+            price: 249,
+            image: '/images/product4.png',
+            badge: 'Best Seller',
+        },
+        {
+            id: 5,
+            name: 'Luxury Leather Key Pouch',
+            description: 'Royal leather pouch for safe storage.',
+            price: 179,
+            image: '/images/product5.png',
+            badge: 'Premium',
+        },
+        {
+            id: 6,
+            name: 'Crystal Key Charm',
+            description: 'Elegant crystal charm for your keys.',
+            price: 129,
+            image: '/images/product6.png',
+            badge: 'Limited',
+        },
     ];
 
     return (

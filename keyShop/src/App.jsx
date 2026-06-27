@@ -7,10 +7,12 @@ import Products from './pages/Product';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Cart from './pages/Cart';
+import Buylater from './pages/Buylater';
 import './App.css';
 
 function App() {
     const [cartItems, setCartItems] = useState([]);
+    const [buyLaterItems, setBuyLaterItems] = useState([]);
 
     function addToCart(product) {
         setCartItems((previousItems) => {
@@ -40,16 +42,54 @@ function App() {
         setCartItems((previousItems) => previousItems.filter((item) => item.id !== id));
     }
 
+    function moveToBuyLater(id) {
+        setCartItems((previousItems) => {
+            const itemToMove = previousItems.find((item) => item.id === id);
+            if (!itemToMove) return previousItems;
+
+            setBuyLaterItems((previousLater) => {
+                const exists = previousLater.find((item) => item.id === id);
+                return exists ? previousLater : [...previousLater, itemToMove];
+            });
+
+            return previousItems.filter((item) => item.id !== id);
+        });
+    }
+
+    function moveToCart(id) {
+        setBuyLaterItems((previousLater) => {
+            const itemToMove = previousLater.find((item) => item.id === id);
+            if (!itemToMove) return previousLater;
+
+            setCartItems((previousItems) => {
+                const exists = previousItems.find((item) => item.id === id);
+                if (exists) {
+                    return previousItems.map((item) =>
+                        item.id === id ? { ...item, quantity: item.quantity + itemToMove.quantity } : item
+                    );
+                }
+                return [...previousItems, itemToMove];
+            });
+
+            return previousLater.filter((item) => item.id !== id);
+        });
+    }
+
+    function removeFromBuyLater(id) {
+        setBuyLaterItems((previousItems) => previousItems.filter((item) => item.id !== id));
+    }
+
     function clearCart() {
         setCartItems([]);
     }
 
     const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
+    const buyLaterCount = buyLaterItems.length;
 
     return (
         <BrowserRouter>
             <div className="App">
-                <Header cartItems={cartItems} cartCount={cartCount} />
+                <Header cartCount={cartCount} buyLaterCount={buyLaterCount} />
                 <main>
                     <Routes>
                         <Route path="/" element={<Home addToCart={addToCart} />} />
@@ -61,9 +101,22 @@ function App() {
                             element={
                                 <Cart
                                     cartItems={cartItems}
+                                    buyLaterItems={buyLaterItems}
                                     onUpdateQuantity={updateCartItem}
                                     onRemoveItem={removeFromCart}
+                                    onMoveToBuyLater={moveToBuyLater}
+                                    onRemoveBuyLater={removeFromBuyLater}
                                     onClearCart={clearCart}
+                                />
+                            }
+                        />
+                        <Route
+                            path="/buy-later"
+                            element={
+                                <Buylater
+                                    buyLaterItems={buyLaterItems}
+                                    onRemoveItem={removeFromBuyLater}
+                                    onMoveToCart={moveToCart}
                                 />
                             }
                         />

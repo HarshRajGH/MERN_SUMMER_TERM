@@ -1,8 +1,25 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
-function Cart({ cartItems = [], onUpdateQuantity, onRemoveItem, onClearCart }) {
+function Cart({ cartItems = [], onUpdateQuantity, onRemoveItem, onMoveToBuyLater, onClearCart }) {
+    const [pendingRemoveItem, setPendingRemoveItem] = useState(null);
     const totalAmount = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
     const totalItems = cartItems.reduce((total, item) => total + item.quantity, 0);
+
+    const handleConfirmRemove = () => {
+        onRemoveItem(pendingRemoveItem.id);
+        setPendingRemoveItem(null);
+    };
+
+    const handleMoveToBuyLater = () => {
+        onMoveToBuyLater(pendingRemoveItem.id);
+        setPendingRemoveItem(null);
+    };
+
+    const handleCancelRemove = () => {
+        setPendingRemoveItem(null);
+    };
+
     if (cartItems.length === 0) {
         return (
             <section className="cartPage emptyCart">
@@ -40,7 +57,7 @@ function Cart({ cartItems = [], onUpdateQuantity, onRemoveItem, onClearCart }) {
                                     <strong>${(item.price * item.quantity).toFixed(2)}</strong>
                                 </div>
                             </div>
-                            <button className="removeBtn" onClick={() => onRemoveItem(item.id)}>Remove</button>
+                            <button className="removeBtn" onClick={() => setPendingRemoveItem(item)}>Remove</button>
                         </article>
                     ))}
                 </div>
@@ -63,9 +80,32 @@ function Cart({ cartItems = [], onUpdateQuantity, onRemoveItem, onClearCart }) {
                         <span>Total</span>
                         <span>${totalAmount.toFixed(2)}</span>
                     </div>
-                    <button className="checkoutBtn">Checkout</button>
+                    <button className="checkoutBtn">Proceed to Checkout</button>
                 </aside>
             </div>
+
+            {pendingRemoveItem && (
+                <div className="confirmationOverlay">
+                    <div className="confirmationModal">
+                        <h3>Are you sure?</h3>
+                        <p>
+                            Do you want to remove <strong>{pendingRemoveItem.name}</strong> from your cart,
+                            or move it to Buy Later?
+                        </p>
+                        <div className="confirmationActions">
+                            <button className="removeBtn modalRemoveBtn" onClick={handleConfirmRemove}>
+                                Remove
+                            </button>
+                            <button className="clearCartBtn modalMoveBtn" onClick={handleMoveToBuyLater}>
+                                Buy Later
+                            </button>
+                            <button className="continueShoppingBtn modalCancelBtn" onClick={handleCancelRemove}>
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </section>
     );
 }
