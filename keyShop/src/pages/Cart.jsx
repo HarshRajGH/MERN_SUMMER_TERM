@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 function Cart({ cartItems = [], onUpdateQuantity, onRemoveItem, onClearCart }) {
     const totalAmount = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
-
+    const totalItems = cartItems.reduce((total, item) => total + item.quantity, 0);
     if (cartItems.length === 0) {
         return (
             <section className="cartPage emptyCart">
@@ -18,7 +18,7 @@ function Cart({ cartItems = [], onUpdateQuantity, onRemoveItem, onClearCart }) {
             <div className="cartHeader">
                 <div>
                     <h1>Your Cart</h1>
-                    <p>{cartItems.length} item{cartItems.length > 1 ? "s" : ""} selected</p>
+                    <p>{totalItems} item{totalItems > 1 ? "s" : ""} selected</p>
                 </div>
                 <button className="clearCartBtn" onClick={onClearCart}>Clear Cart</button>
             </div>
