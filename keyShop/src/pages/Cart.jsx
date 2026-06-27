@@ -47,6 +47,10 @@ function Cart({ cartItems = [], onUpdateQuantity, onRemoveItem, onClearCart }) {
 
                 <aside className="cartSummary">
                     <h2>Order Summary</h2>
+                    <div className="summaryRow total">
+                        <span>Total Items</span>
+                        <span>{totalItems}</span>
+                    </div>
                     <div className="summaryRow">
                         <span>Subtotal</span>
                         <span>${totalAmount.toFixed(2)}</span>
