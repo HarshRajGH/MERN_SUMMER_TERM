@@ -166,12 +166,12 @@ nav ul li a:hover::after {
 
 /* ===== PRODUCTS SECTION ===== */
 .products-section {
-    padding: 60px 60px;
+    padding: 28px 28px;
     background-color: #FFFDFE;
 }
 
 .products-header {
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     text-align: center;
 }
 
@@ -362,7 +362,7 @@ nav ul li a:hover::after {
 }
 
 .cartPage {
-    padding: 60px;
+    padding: 28px;
     min-height: calc(100vh - 220px);
     background: #FFF7FC;
 }
@@ -395,8 +395,21 @@ nav ul li a:hover::after {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 16px;
-    margin-bottom: 24px;
+    gap: 12px;
+    margin-top: 0px;
+    margin-bottom: 5px; /* Reduced from 10px to pull the container closer */
+}
+
+/* FIX: This removes the default browser spacing around your text elements */
+.cartHeader h1, 
+.cartHeader p {
+    margin: 0; 
+    padding: 0;
+}
+
+/* Add a tiny gap between "Your Cart" and "10 items selected" so they don't stick */
+.cartHeader h1 {
+    margin-bottom: 2px;
 }
 
 .clearCartBtn,
@@ -423,9 +436,9 @@ nav ul li a:hover::after {
 .cartLayout {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    gap: 24px;
+    gap: 14px;
     background-color: rgb(217, 183, 243);
-    padding: 18px;
+    padding: 12px;
     border-radius: 16px;
     box-shadow: 0 10px 30px rgba(30, 60, 100, 0.08);
 }
@@ -433,13 +446,13 @@ nav ul li a:hover::after {
 .cartItems {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 8px;
 }
 
 .cartItem {
     display: flex;
-    gap: 16px;
-    padding: 20px;
+    gap: 10px;
+    padding: 10px;
     background: #FFFDFE;
     border-radius: 16px;
     box-shadow: 0 10px 30px rgba(30, 60, 100, 0.08);
@@ -499,7 +512,7 @@ nav ul li a:hover::after {
 
 .cartSummary {
     background: #FFFDFE;
-    padding: 24px;
+    padding: 14px;
     border-radius: 16px;
     height: fit-content;
     position: sticky;

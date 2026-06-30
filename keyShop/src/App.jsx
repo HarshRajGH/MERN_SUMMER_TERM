@@ -9,6 +9,7 @@ import Contact from './pages/Contact';
 import Cart from './pages/Cart';
 import Buylater from './pages/Buylater';
 import './App.css';
+import toast,{ Toaster } from 'react-hot-toast';
 
 function App() {
     const [cartItems, setCartItems] = useState([]);
@@ -25,6 +26,7 @@ function App() {
 
             return [...previousItems, { ...product, quantity: 1 }];
         });
+        toast.success(`${product.name} added to cart!`);
     }
 
     function updateCartItem(id, quantity) {
@@ -40,6 +42,7 @@ function App() {
 
     function removeFromCart(id) {
         setCartItems((previousItems) => previousItems.filter((item) => item.id !== id));
+        toast.error('Item removed from cart!');
     }
 
     function moveToBuyLater(id) {
@@ -54,6 +57,7 @@ function App() {
 
             return previousItems.filter((item) => item.id !== id);
         });
+        toast.success('Item moved to buy later!');
     }
 
     function moveToCart(id) {
@@ -77,10 +81,12 @@ function App() {
 
     function removeFromBuyLater(id) {
         setBuyLaterItems((previousItems) => previousItems.filter((item) => item.id !== id));
+        toast.error('Item removed from buy later!');
     }
 
     function clearCart() {
         setCartItems([]);
+        toast.success('Cart cleared!');
     }
 
     const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
@@ -122,6 +128,7 @@ function App() {
                         />
                     </Routes>
                 </main>
+                <Toaster position="bottom-center" reverseOrder={false} />
                 <Footer />
             </div>
         </BrowserRouter>

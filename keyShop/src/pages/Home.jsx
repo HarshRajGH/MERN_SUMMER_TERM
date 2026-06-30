@@ -53,6 +53,22 @@ function Home({ addToCart }) {
             image: '/images/product6.png',
             badge: 'Limited',
         },
+        {
+            id: 7,
+            name: 'Metallic Heart Keychain',
+            description: 'Stylish heart-shaped keychain with a polished finish.',
+            price: 89,
+            image: '/images/product7.png',
+            badge: 'Trending',
+        },
+        {
+            id: 8,
+            name: 'Mini Cartoon Keychain',
+            description: 'Cute cartoon design perfect for everyday use.',
+            price: 69,
+            image: '/images/product8.png',
+            badge: 'Fresh',
+        },
     ];
 
     return (
