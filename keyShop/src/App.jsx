@@ -16,6 +16,14 @@ function App() {
     const [buyLaterItems, setBuyLaterItems] = useState([]);
 
     function addToCart(product) {
+        const existingItem = cartItems.find((item) => item.id === product.id);
+        const currentQuantity = existingItem ? existingItem.quantity : 0;
+
+        if (currentQuantity >= product.stock) {
+            toast.error(`${product.name} is out of stock.`, { id: 'cart-toast' });
+            return;
+        }
+
         setCartItems((previousItems) => {
             const productExists = previousItems.find((item) => item.id === product.id);
             if (productExists) {
@@ -26,12 +34,19 @@ function App() {
 
             return [...previousItems, { ...product, quantity: 1 }];
         });
-        toast.success(`${product.name} added to cart!`);
+        toast.success(`${product.name} added to cart!`, { id: 'cart-toast' });
     }
 
     function updateCartItem(id, quantity) {
+        const item = cartItems.find((cartItem) => cartItem.id === id);
+
         if (quantity <= 0) {
             setCartItems((previousItems) => previousItems.filter((item) => item.id !== id));
+            return;
+        }
+
+        if (item && quantity > item.stock) {
+            toast.error(`${item.name} is out of stock.`, { id: 'cart-toast' });
             return;
         }
 
@@ -42,7 +57,7 @@ function App() {
 
     function removeFromCart(id) {
         setCartItems((previousItems) => previousItems.filter((item) => item.id !== id));
-        toast.error('Item removed from cart!');
+        toast.error('Item removed from cart!', { id: 'cart-toast' });
     }
 
     function moveToBuyLater(id) {
@@ -57,13 +72,21 @@ function App() {
 
             return previousItems.filter((item) => item.id !== id);
         });
-        toast.success('Item moved to buy later!');
+        toast.success('Item moved to buy later!', { id: 'cart-toast' });
     }
 
     function moveToCart(id) {
         setBuyLaterItems((previousLater) => {
             const itemToMove = previousLater.find((item) => item.id === id);
             if (!itemToMove) return previousLater;
+
+            const existingCartItem = cartItems.find((item) => item.id === id);
+            const currentQuantity = existingCartItem ? existingCartItem.quantity : 0;
+
+            if (currentQuantity + itemToMove.quantity > itemToMove.stock) {
+                toast.error(`${itemToMove.name} is out of stock.`, { id: 'cart-toast' });
+                return previousLater;
+            }
 
             setCartItems((previousItems) => {
                 const exists = previousItems.find((item) => item.id === id);
@@ -81,12 +104,12 @@ function App() {
 
     function removeFromBuyLater(id) {
         setBuyLaterItems((previousItems) => previousItems.filter((item) => item.id !== id));
-        toast.error('Item removed from buy later!');
+        toast.error('Item removed from buy later!', { id: 'cart-toast' });
     }
 
     function clearCart() {
         setCartItems([]);
-        toast.success('Cart cleared!');
+        toast.success('Cart cleared!', { id: 'cart-toast' });
     }
 
     const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);

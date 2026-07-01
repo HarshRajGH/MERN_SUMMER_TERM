@@ -12,6 +12,7 @@ function Home({ addToCart }) {
             price: 99,
             image: '/images/product1.png',
             badge: 'New',
+            stock: 10,
         },
         {
             id: 2,
@@ -20,6 +21,7 @@ function Home({ addToCart }) {
             price: 149,
             image: '/images/product2.png',
             badge: 'Popular',
+            stock: 5,
         },
         {
             id: 3,
@@ -28,6 +30,7 @@ function Home({ addToCart }) {
             price: 199,
             image: '/images/product3.png',
             badge: 'Sale',
+            stock: 8,
         },
         {
             id: 4,
@@ -36,6 +39,7 @@ function Home({ addToCart }) {
             price: 249,
             image: '/images/product4.png',
             badge: 'Best Seller',
+            stock: 3,
         },
         {
             id: 5,
@@ -44,6 +48,7 @@ function Home({ addToCart }) {
             price: 179,
             image: '/images/product5.png',
             badge: 'Premium',
+            stock: 6,
         },
         {
             id: 6,
@@ -52,6 +57,7 @@ function Home({ addToCart }) {
             price: 129,
             image: '/images/product6.png',
             badge: 'Limited',
+            stock: 4,
         },
         {
             id: 7,
@@ -60,6 +66,7 @@ function Home({ addToCart }) {
             price: 89,
             image: '/images/product7.png',
             badge: 'Trending',
+            stock: 7,
         },
         {
             id: 8,
@@ -68,6 +75,7 @@ function Home({ addToCart }) {
             price: 69,
             image: '/images/product8.png',
             badge: 'Fresh',
+            stock: 12,
         },
     ];
 
