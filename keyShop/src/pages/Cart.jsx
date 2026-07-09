@@ -1,10 +1,28 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
 
 function Cart({ cartItems = [], onUpdateQuantity, onRemoveItem, onMoveToBuyLater, onClearCart }) {
     const [pendingRemoveItem, setPendingRemoveItem] = useState(null);
     const totalAmount = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
     const totalItems = cartItems.reduce((total, item) => total + item.quantity, 0);
+
+    const handleClearCart = async () => {
+        const result = await Swal.fire({
+            title: 'Clear Cart',
+            text: 'Are you sure you want to clear your cart?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, clear it',
+            cancelButtonText: 'No, keep it',
+            reverseButtons: true,
+        });
+
+        if (result.isConfirmed) {
+            onClearCart?.();
+        }
+    };
 
     const handleConfirmRemove = () => {
         onRemoveItem(pendingRemoveItem.id);
@@ -18,6 +36,15 @@ function Cart({ cartItems = [], onUpdateQuantity, onRemoveItem, onMoveToBuyLater
 
     const handleCancelRemove = () => {
         setPendingRemoveItem(null);
+    };
+
+    const handleDecreaseQuantity = (item) => {
+        if (item.quantity <= 1) {
+            setPendingRemoveItem(item);
+            return;
+        }
+
+        onUpdateQuantity(item.id, item.quantity - 1);
     };
 
     if (cartItems.length === 0) {
@@ -37,7 +64,7 @@ function Cart({ cartItems = [], onUpdateQuantity, onRemoveItem, onMoveToBuyLater
                     <h1>Your Cart</h1>
                     <p>{totalItems} item{totalItems > 1 ? "s" : ""} selected</p>
                 </div>
-                <button className="clearCartBtn" onClick={onClearCart}>Clear Cart</button>
+                <button className="clearCartBtn" onClick={handleClearCart}>Clear Cart</button>
             </div>
 
             <div className="cartLayout">
@@ -50,7 +77,7 @@ function Cart({ cartItems = [], onUpdateQuantity, onRemoveItem, onMoveToBuyLater
                                 <p>{item.description}</p>
                                 <div className="cartItemFooter">
                                     <div className="quantityControls">
-                                        <button onClick={() => onUpdateQuantity(item.id, item.quantity - 1)}>-</button>
+                                        <button onClick={() => handleDecreaseQuantity(item)}>-</button>
                                         <span>{item.quantity}</span>
                                         <button onClick={() => onUpdateQuantity(item.id, item.quantity + 1)}>+</button>
                                     </div>

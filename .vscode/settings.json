@@ -9,6 +9,8 @@
     "*": true,
     "plaintext": true,
     "markdown": true,
-    "scminput": false
+    "scminput": false,
+    "html": true,
+    "javascriptreact": true
   }
 }
