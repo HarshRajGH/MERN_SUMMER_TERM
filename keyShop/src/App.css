@@ -429,6 +429,83 @@ nav ul li a:hover::after {
     box-shadow: 0 12px 24px rgba(192,132,252,0.3);
 }
 
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(24, 24, 27, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 1000;
+}
+
+.modalBody {
+    background: #fffdfd;
+    border-radius: 16px;
+    width: min(100%, 400px);
+    padding: 20px;
+    box-shadow: 0 20px 45px rgba(17, 24, 39, 0.18);
+}
+
+.modalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.closeBtn,
+.cancelBtn {
+    border: none;
+    background: transparent;
+    color: #6b7280;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.modalBody form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.modalBody input {
+    padding: 10px 12px;
+    border: 1px solid #d8c8ee;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+.modalActions {
+    display: flex;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.modalActions button[type="submit"] {
+    flex: 1;
+    padding: 10px 14px;
+    border: none;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #C084FC 0%, #5B4B8A 100%);
+    color: white;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.errorText {
+    color: #dc2626;
+    font-size: 13px;
+    margin: -4px 0 0;
+}
+
+.loginMessage {
+    color: #2563eb;
+    font-size: 14px;
+    margin: 0;
+}
+
 .clearCartBtn {
     background: linear-gradient(135deg, #FB7185 0%, #EC4899 100%);
 }
